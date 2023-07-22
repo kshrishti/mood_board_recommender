@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resize and Select Images</title>
+    <style>
+        /* Add some basic styles to the image and container */
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            border: 2px solid #ccc;
+            padding: 5px;
+        }
+
+        .resizable {
+            display: block;
+            max-width: 200px;
+        }
+
+		.selected {
+            border: 4px solid #00f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resize and Select Images</h1>
+    <p>Click and drag the corner of an image to resize it. Click inside the image to select it.</p>
+    <div class="image-container" id="image-container-1">
+        <img src="path_to_your_image/image1.jpg" class="resizable" id="image-1">
+    </div>
+    <div class="image-container" id="image-container-2">
+        <img src="path_to_your_image/image2.jpg" class="resizable" id="image-2">
+    </div>
+
+    <script>
+        // Function to enable image resizing
+        function enableResizing(image) {
+            const container = image.parentElement;
+            let isResizing = false;
+            let originalX, originalY, originalWidth, originalHeight;
+
+            image.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                isResizing = true;
+                originalX = e.clientX;
+                originalY = e.clientY;
+                originalWidth = image.clientWidth;
+                originalHeight = image.clientHeight;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isResizing) return;
+                const newWidth = originalWidth + (e.clientX - originalX);
+                const newHeight = originalHeight + (e.clientY - originalY);
+                image.style.width = newWidth + 'px';
+                image.style.height = newHeight + 'px';
+            });
+
+            document.addEventListener('mouseup', () => {
+                isResizing = false;
+            });
+
+            image.addEventListener('click', () => {
+                // You can add your selection logic here
+                // For example, add a border or apply other styling to the selected image
+                // Remove the border from other images if needed
+                console.log('Image selected:', image.id);
+            });
+        }
+
+		function handleImageSelection(image) {
+            // Toggle the 'selected' class when the image is clicked
+            image.classList.toggle('selected');
+        }
+
+		// Call the function for each resizable image
+		const resizableImages = document.querySelectorAll('.resizable');
+        resizableImages.forEach(image => {
+            enableResizing(image);
+
+            // Add a click event listener to handle image selection
+            image.addEventListener('click', () => {
+                handleImageSelection(image);
+            });
+        });
+    </script>
+</body>
+</html>

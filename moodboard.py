@@ -32,7 +32,7 @@ class Image:
 # 18 categories/tags - and each image has at least 3 tags 
 TAGS = ['Accelerators', 'Beam systems', 'Cryogenics', 'Detectors', 
 				'Electronics', 'Industrial Controls & Simulations', 'Cosmology & Astroparticle Physics'
-				'Information & Communication Technology', 'Magnets', 'Nuclear Physics',
+				'Information & Communication Technology', 'Magnets', 
 				'Biophysics', 'Materials', 'Mechanics', 
 				'Lasers', 'Microelectronics', 'Particle Tracking & Radiation Monitoring',
 				'Radio Frequency Technology', 'Superconductivity', 'Theoretical Physics']
