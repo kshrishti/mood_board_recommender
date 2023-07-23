@@ -37,6 +37,34 @@
         <img src="images/mech_elec.jpg" class="resizable" id="image-3"
              data-categories="Mechanics|Electronics">
     </div>
+	<div class="image-container" id="image-container-4">
+        <img src="images/bio_rad.jpeg" class="resizable" id="image-4"
+             data-categories="Biophysics|Radio Frequency Technology">
+    </div>
+	<div class="image-container" id="image-container-5">
+        <img src="images/cos_theo_det.jpeg" class="resizable" id="image-5"
+             data-categories="Cosmology & Astroparticle Physics|Theoretical Physics|Detectors">
+    </div>
+	<div class="image-container" id="image-container-6">
+        <img src="images/cryo_sup.jpeg" class="resizable" id="image-6"
+             data-categories="Cryogenics|Superconductivity">
+    </div>
+	<div class="image-container" id="image-container-7">
+        <img src="images/cryo_sup_mat_mag_det.jpeg" class="resizable" id="image-7"
+             data-categories="Cryogenics|Superconductivity|Materials|Magnets|Detectors">
+    </div>
+	<div class="image-container" id="image-container-8">
+        <img src="images/det_ict_part_ics.jpeg" class="resizable" id="image-8"
+             data-categories="Detectors|Information & Communication Technology|Industrial Controls & Simulations|Particle Tracking & Radiation Monitoring">
+    </div>
+	<div class="image-container" id="image-container-9">
+        <img src="images/las_cryo_mat.jpeg" class="resizable" id="image-9"
+             data-categories="Lasers|Cryogenics|Materials">
+    </div>
+	<div class="image-container" id="image-container-10">
+        <img src="images/mag_mat_det.jpeg" class="resizable" id="image-10"
+             data-categories="Magnets|Materials|Detectors">
+    </div>
 
 	<button id="show-recommendations-button">Show me recommendations!</button>
     <div id="recommendations"></div>
@@ -82,6 +110,36 @@
 			let weighting = {};
 
 			let weightingArray = [];
+
+			let subcategory_mapping = {
+				'Accelerators': 'LHC, Synchotron, Linear Accelerators, Linear Colliders',
+				'Beam systems': 'Beam line, Jets, Collimators, Proton beams, DAQ, DQM',
+				'Cryogenics': 'Liquid helium, Superfluids, Liquid nitrogen, Thermal conductivity, Thermal resistance, Superconductors, Cryoengineering',
+				'Detectors': 'CMS, LHCb, ALICE, ATLAS, TOTEM, MoEDAL, LHCf, SND, FASER, Subdetectors, Scintillators, Calorimeters, Trackers, Photomultipliers, Cherenkov detectors, Timepix detector',
+				'Electronics': 'Charge coupled device, Readout systems, Front-end electronics, Analog to digital converter, Digital signal processor, Mean-timer circuits, Gain, Amplifiers, Discriminators, Charge to digital converters (QDC), Time to digital converters (TDC), LED pulsing',
+				'Industrial Controls & Simulations': 'Data acquisition (DAQ), 3D magnetic sensor calibrator, Control and Monitoring Framework, Chemical Register for Environment, Health and Safety (CERES), Radon detectors, Train Inspection Monoral (TIM)',
+				'Cosmology & Astroparticle Physics': 'Dark matter, Neutrino astronomy, Cosmic Microwave Background Radiation, Antimatter, High energy cosmic rays, Supernovae, Gamma-ray astronomy, Dark energy',
+				'Information & Communication Technology': 'ActiWiz, BioDynaMo, CERN VM-FS, CERNbot, FLUKA, Indico, Invenio, REMUS, ROOT, Data Analysis, Artificial Intelligence, Neural Networks',
+				'Magnets': 'Electromagnetism, Dipole magnet, Quadrupole magnet, 3D Magnetic Sensor Calibrator, GaToroid, Magnet Power supplies',
+				'Biophysics': 'BioDynaMo, Particle Therapy, Alpha Therapy, gamma-MRI , Medical ventilators',
+				'Materials': 'Front-end readout, Micro Chemical Vias, Thermal management materials, Thin film coatings',
+				'Mechanics': 'Compact Universal Orbital Cutter, Mounting mechanisms, Precision positioning',
+				'Lasers': 'Heavy ions, Charged particles, Optical lenses, Precision Laser Inclinometer',
+				'Microelectronics': 'PicoTDC, DC-DC converter, Front-end readout electronics, GEMPix, KiCad EDA , Medipix, Micro Chemical Vias, Timepix',
+				'Particle Tracking & Radiation Monitoring': 'Gas electron multiplier, Medipix, Strip SiPM, Timepix',
+				'Radio Frequency Technology': 'Coaxial Pulse Conditioner, Compact Linear Proton Accelerator, Thin film coatings, Gamma rays',
+				'Superconductivity': 'Thin film coatings, Cooling systems',
+				'Theoretical Phyiscs': 'Standard Model, Beyond the Standard Model, String Theory, Higgs boson, Energy'
+			}
+
+			let categories = [
+				'Accelerators', 'Beam systems', 'Cryogenics', 'Detectors', 
+				'Electronics', 'Industrial Controls & Simulations', 'Cosmology & Astroparticle Physics',
+				'Information & Communication Technology', 'Magnets', 
+				'Biophysics', 'Materials', 'Mechanics', 
+				'Lasers', 'Microelectronics', 'Particle Tracking & Radiation Monitoring',
+				'Radio Frequency Technology', 'Superconductivity', 'Theoretical Physics'
+			]
 
 			// Function to get the categories for an image
 			function getImageCategories(image) {
@@ -130,7 +188,8 @@
 				// Generate the HTML content for the recommendations
 				let recommendationsHTML = '';
 				for (let i = 0; i < Math.min(3, weightingArray.length); i++) {
-					recommendationsHTML += `<p>Area of interest ${i + 1}: ${weightingArray[i][0]}</p>`;
+					recommendationsHTML += `<p>Area of interest ${i + 1}: ${weightingArray[i][0]}</p> 
+											<p style='margin-left: 25px;'>Futher topics to explore in this area are: ${subcategory_mapping[weightingArray[i][0]]}</p>`;
 				}
 
 				// Display the recommendations on the screen
